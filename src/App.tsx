@@ -4,30 +4,34 @@ import { Categories } from './data/categories';
 import { items } from './data/items';
 import { Category } from './types/category';
 import { Item } from './types/item';
-import { getCurrentMonth } from './helpers/dateFilter';
+import { getCurrentMonth, filterListMonth } from './helpers/dateFilter';
+import { TableArea } from './components/TableArea';
+
+
+const App = () => {
 
 const [list, setList] = useState(items);
 const [filteredList, setFilteredList] = useState<Item[]>([]);
 const [currentMonth, setCurrentMonth] = useState(getCurrentMonth());
 
 useEffect(() => {
-  
-}, [list, currentMonth])
-const app = () => {
+  setFilteredList( filterListMonth(list, currentMonth) )
+}, [list, currentMonth]) 
+
   return(
     <C.Container>
       <C.Header>
         <C.HeaderText>
-          Sistema Financeiro do Bryan
+          Sistema Financeiro Família Serrão
         </C.HeaderText>
       </C.Header>
       <C.Body>
         {/*area de informação*/}
         {/*area de inserir*/}
-        {/*area de items*/}
+        <TableArea />
       </C.Body>
     </C.Container>
   );
 }
 
-export default app;
+export default App;
